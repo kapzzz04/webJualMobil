@@ -1,10 +1,7 @@
 <?php
 require 'conection.php';
 
-$tes = 19;
-function jinja() {
-    echo "ini halaman haha";
-}
+// ga dipake script nya ...............
 ?>
 
 <!doctype html>
