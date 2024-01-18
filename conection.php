@@ -77,15 +77,16 @@ $query = "UPDATE users SET
 
         $id = $data['id_mobil'];
         $nama = htmlspecialchars($data['nama_mobil']);
-        $merek = htmlspecialchars($data['merek_mobil']);
         $harga = htmlspecialchars($data['harga_mobil']);
-        $kategori = htmlspecialchars($data['kategori_mobil']);
+        $id_k = $data['id_kategori'];
+        $id_m = $data['id_merek'];
 
         $query = "UPDATE mobil SET
                     nama_mobil = '$nama',
-                    merek_mobil = '$merek',
+                    id_kategori = $id_k,
+                    id_merek = $id_m,
                     harga_mobil = '$harga',
-                    kategori_mobil = '$kategori'
+                    updated_at = CURRENT_TIMESTAMP()
                     WHERE id_mobil = $id
                     ";
 
@@ -100,12 +101,12 @@ function tambah($data) {
     global $conn;
 
     $nama = htmlspecialchars($data['nama_mobil']);
-    $merek = htmlspecialchars($data['merek_mobil']);
     $harga = htmlspecialchars($data['harga_mobil']);
-    $kategori = htmlspecialchars($data['kategori_mobil']);
+    $id_k = $data['id_kategori'];
+    $id_m = $data['id_merek'];
     
-        $query = "INSERT INTO `mobil`(`id_mobil`, `nama_mobil`, `merek_mobil`, `harga_mobil`, `kategori_mobil`) 
-        VALUES ('','$nama','$merek','$harga','$kategori')";
+        $query = "INSERT INTO `mobil`(`id_mobil`, `nama_mobil`, `id_kategori`, `id_merek`, `harga_mobil`, `created_at`) 
+        VALUES ('', '$nama', $id_k, $id_m, '$harga', CURRENT_TIMESTAMP())";
 
         mysqli_query($conn, $query);
 

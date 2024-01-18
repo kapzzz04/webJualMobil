@@ -2,6 +2,8 @@
   require '../conection.php';
 
   $id = $_GET['edit'];
+  $DataKategori = query("SELECT * FROM kategori");
+  $DataBrand = query("SELECT * FROM merk");
 
  if($_GET['Kedit'] == "mobil") {
     $DataMobil = query("SELECT * FROM mobil WHERE id_mobil = $id");
@@ -161,6 +163,7 @@
                     <?php } ?>
                     <?php }?>
 
+
                     <!-- fungsi tambah user -->
                     <?php if($_GET['Kedit'] == "mobil") { ?>
                     <h4>Edit Data Mobil</h4>
@@ -175,9 +178,16 @@
                                             name="nama_mobil" value="<?= $DataMobil[0]["nama_mobil"]; ?>"></td>
                                 </tr>
                                 <tr>
-                                    <td>Merek Mobil</td>
-                                    <td><input type="text" placeholder="Merk Barang" required class="form-control"
-                                            name="merek_mobil" value="<?= $DataMobil[0]["merek_mobil"] ?>"></td>
+                                    <td>Brand Mobil</td>
+                                    <td>
+                                        <select id="cars" name="id_merek" required class="form-control">
+                                            <option value="null" class="text-primary">Pilih Brand Mobil</option>
+                                            <?php foreach ($DataBrand as $row ) : ?>
+                                            <option value="<?= $row["id_merek"]; ?>"><?= $row["nama_merek"]; ?>
+                                            </option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Harga Mobil</td>
@@ -185,9 +195,17 @@
                                             name="harga_mobil" value="<?= $DataMobil[0]["harga_mobil"] ?>"></td>
                                 </tr>
                                 <tr>
+
                                     <td>Kategori Mobil</td>
-                                    <td><input type="text" placeholder="Harga Jual" required class="form-control"
-                                            name="kategori_mobil" value="<?= $DataMobil[0]["kategori_mobil"] ?>"></td>
+                                    <td>
+                                        <select id="cars" name="id_kategori" required class="form-control">
+                                            <option value="null">Pilih Kategori Mobil</option>
+                                            <?php foreach ($DataKategori as $row ) : ?>
+                                            <option value="<?= $row["id_kategori"]; ?>"><?= $row["nama_kategori"]; ?>
+                                            </option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </td>
                                 </tr>
                             </table>
                         </div>

@@ -1,7 +1,10 @@
 <?php 
   require '../../conection.php';
 
-  $DataMobil = query("SELECT * FROM mobil");
+  $DataMobil = query("SELECT mobil.*, kategori.nama_kategori, merk.nama_merek FROM mobil
+  INNER JOIN kategori ON mobil.id_kategori = kategori.id_kategori
+  INNER JOIN merk ON mobil.id_merek = merk.id_merek
+  WHERE kategori.id_kategori = mobil.id_kategori AND merk.id_merek = mobil.id_merek");
 
 if(isset($_GET['id'])) {
     $id = $_GET["id"];
@@ -10,8 +13,6 @@ if(isset($_GET['id'])) {
     hapus($queryMb);
 }
 
-
-// var_dump($_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -138,7 +139,6 @@ if(isset($_GET['id'])) {
                     <h4>Data Mobil</h4>
                     <br />
 
-
                     <?php if(isset($_GET['success-edit'])){?>
                     <div class="alert alert-success">
                         <p>Update Data Berhasil !</p>
@@ -172,20 +172,26 @@ if(isset($_GET['id'])) {
                                         <th>No.</th>
                                         <th>Kategori</th>
                                         <th>Nama</th>
-                                        <th>Merek</th>
+                                        <th>Brand</th>
                                         <th>Harga</th>
+                                        <th>Created</th>
+                                        <th>Update</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <?php $i = 1 ?>
                                     <?php foreach ($DataMobil as $row ) : ?>
                                     <tr>
                                         <td><?= $i ?></td>
+                                        <td><?= $row["nama_kategori"] ?></td>
                                         <td><?= $row["nama_mobil"] ?></td>
-                                        <td><?= $row["merek_mobil"] ?></td>
+                                        <td><?= $row["nama_merek"] ?></td>
                                         <td>Rp<?= $row["harga_mobil"] ?></td>
-                                        <td><?= $row["kategori_mobil"] ?></td>
+
+                                        <td><?= date("Y-m-d H:i:s", strtotime($row["created_at"])); ?></td>
+                                        <td><?= date("Y-m-d H:i:s", strtotime($row["updated_at"])); ?></td>
                                         <td>
                                             <a href="#">
                                                 <button class="btn btn-warning" type="button"
