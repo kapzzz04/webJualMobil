@@ -13,6 +13,8 @@ if(isset($_GET['id'])) {
     hapus($queryMb);
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -150,6 +152,7 @@ if(isset($_GET['id'])) {
                     </div>
                     <?php }?>
 
+
                     <!-- formulir tambah -->
                     <table>
                         <tr>
@@ -188,8 +191,7 @@ if(isset($_GET['id'])) {
                                         <td><?= $row["nama_kategori"] ?></td>
                                         <td><?= $row["nama_mobil"] ?></td>
                                         <td><?= $row["nama_merek"] ?></td>
-                                        <td>Rp<?= $row["harga_mobil"] ?></td>
-
+                                        <td>Rp<?= number_format($row["harga_mobil"], 0, ',', '.'); ?></td>
                                         <td><?= date("Y-m-d H:i:s", strtotime($row["created_at"])); ?></td>
                                         <td><?= date("Y-m-d H:i:s", strtotime($row["updated_at"])); ?></td>
                                         <td>
